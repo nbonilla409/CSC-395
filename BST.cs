@@ -1,4 +1,4 @@
-﻿//Create a Tree class that implements the binary search tree(BST) methods shown below, and stores objects
+//Create a Tree class that implements the binary search tree(BST) methods shown below, and stores objects
 //of class Student. You need to implement a Student class that stores name, major, and state of origin.The
 //students should be sorted alphabetically by names in the tree:
 
@@ -26,17 +26,17 @@ namespace BST
     {
         static void Main(string[] args)
         {
-            Student Charles = new Student("Charles", "Economics", "IL");
-            Student Mike = new Student("Mike", "Computer Science", "WA");
-            Student Alice = new Student("Alice", "Math", "WA");
-            Student Jennifer = new Student("Jennifer", "Health and Science", "WA");
+            BST.Student Charles = new BST.Student("Charles", "Economics", "IL");
+            BST.Student Mike = new BST.Student("Mike", "Computer Science", "WA");
+            BST.Student Alice = new BST.Student("Alice", "Math", "WA");
+            BST.Student Jennifer = new BST.Student("Jennifer", "Health and Science", "WA");
 
             BST myTree = new BST();
             myTree.insert(Charles);
             myTree.insert(Mike);
             myTree.insert(Alice);
             myTree.insert(Jennifer);
-            //myTree.insert("Carl", "Liberal Arts", "HI");
+            myTree.insert("Carl", "Liberal Arts", "HI");
 
             Console.WriteLine(myTree.search("Carl"));
             Console.WriteLine(myTree.search("Jennifer"));
@@ -49,66 +49,59 @@ namespace BST
         }
     }
 
-    class Student //Create a student class with name, major, and origin state.
+    
+
+    public class BST
     {
-        public Student(string name, string major, string originState)
+        public class Student //Create a student class with name, major, and origin state.
         {
-            this.name = name;
-            this.major = major;
-            this.originState = originState;
-        }
+            public string name { get; set; }
+            public string major { get; set; }
+            public string originState { get; set; }
+            public Student left, right;
 
-        public string name { get; set; }
-        public string major { get; set; }
-        public string originState { get; set; }
-    }
-
-    class BST
-    {
-        public class Node
-        {
-            public Student value;
-            public Node left, right;
-
-            public Node(Student newStudent)
-            {
-                value = newStudent;
-            }
-
-            public Node(string name, string major, string originState)
+            public Student(string name, string major, string originState)
             {
                 this.name = name;
                 this.major = major;
                 this.originState = originState;
             }
-            public string name { get; set; }
-            public string major { get; set; }
-            public string originState { get; set; }
+
         }
 
-        Node root;
+        //public Node(string name, string major, string originState)
+        //{
+        //    this.name = name;
+        //    this.major = major;
+        //    this.originState = originState;
+        //}
+        //public string name { get; set; }
+        //public string major { get; set; }
+        //public string originState { get; set; }
+    
+
+        Student root;
 
         public bool isEmpty()
         {
             return root == null;
         }
 
-        
-        public void insert(Student newStudent)
+        public void insert(string name, string major, string originState)
         {
-            Node newNode = new Node(newStudent);
+            Student newStudent = new Student(name, major, originState);
 
             if (isEmpty())
             {
-                root = newNode;
+                root = newStudent;
             }
             else
             {
-                Node current = root;
+                Student current = root;
 
                 while (true)
                 {
-                    if (string.Compare(newStudent.name, current.value.name) < 0)
+                    if (string.Compare(newStudent.name, current.name) < 0)
                     {
                         if (current.left != null)
                         {
@@ -116,7 +109,7 @@ namespace BST
                         }
                         else
                         {
-                            current.left = newNode;
+                            current.left = newStudent;
                             break;
                         }
                     }
@@ -128,7 +121,48 @@ namespace BST
                         }
                         else
                         {
-                            current.right = newNode;
+                            current.right = newStudent;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        public void insert(Student newStudent)
+        {
+            if (isEmpty())
+            {
+                root = newStudent;
+            }
+            else
+            {
+                Student current = root;
+
+                while (true)
+                {
+                    if (string.Compare(newStudent.name, current.name) < 0)
+                    {
+                        if (current.left != null)
+                        {
+                            current = current.left;
+                        }
+                        else
+                        {
+                            current.left = newStudent;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (current.right != null)
+                        {
+                            current = current.right;
+                        }
+                        else
+                        {
+                            current.right = newStudent;
                             break;
                         }
                     }
@@ -144,15 +178,15 @@ namespace BST
             }
             else
             {
-                Node current = root;
+                Student current = root;
 
                 while (current != null)
                 {
-                    if (key == current.value.name)
+                    if (key == current.name)
                     {
                         return true;
                     }
-                    else if (string.Compare(key, current.value.name) < 0)
+                    else if (string.Compare(key, current.name) < 0)
                     {
                         current = current.left;
                     }
@@ -171,11 +205,11 @@ namespace BST
             preOrderHelper(root);
         }
 
-        public void preOrderHelper(Node current)
+        public void preOrderHelper(Student current)
         {
             if (current != null)
             {
-                Console.WriteLine(current.value.name + " ");
+                Console.WriteLine(current.name + " ");
                 preOrderHelper(current.left);
                 preOrderHelper(current.right);
             }
@@ -186,12 +220,12 @@ namespace BST
             inOrderHelper(root);
         }
 
-        public void inOrderHelper(Node current)
+        public void inOrderHelper(Student current)
         {
             if (current != null)
             {
                 inOrderHelper(current.left);
-                Console.WriteLine(current.value.name + " ");
+                Console.WriteLine(current.name + " ");
                 inOrderHelper(current.right);
             }
         }
@@ -201,13 +235,13 @@ namespace BST
             postOrderHelper(root);
         }
 
-        public void postOrderHelper(Node current)
+        public void postOrderHelper(Student current)
         {
             if (current != null)
             {
                 preOrderHelper(current.left);
                 preOrderHelper(current.right);
-                Console.WriteLine(current.value.name + " ");
+                Console.WriteLine(current.name + " ");
             }
         }
 
