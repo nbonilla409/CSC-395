@@ -35,11 +35,10 @@ namespace BST
             //Instantiate the tree and insert the student nodes.
             BST myTree = new BST();                             //              Charles
             myTree.insert(Charles);                             //              /     \
-            myTree.insert(Mike);                                //           Alice    Mike
-            myTree.insert(Alice);                               //              \
-            myTree.insert(Jennifer);                            //           Jennifer
-            myTree.insert("Carl", "Liberal Arts", "HI");        //             /
-                                                                //           Carl 
+            myTree.insert(Mike);                                //          Alice      Mike
+            myTree.insert(Alice);                               //              \     /
+            myTree.insert(Jennifer);                            //            Carl    Jennifer
+            myTree.insert("Carl", "Liberal Arts", "HI");
             //Search for students(output is boolean value).
             Console.WriteLine(myTree.search("Carl"));
             Console.WriteLine(myTree.search("Carlos"));
@@ -53,7 +52,7 @@ namespace BST
             Console.WriteLine(" ");
 
             //Output the Height and Number of Leaves on the the tree.
-            Console.WriteLine(myTree.printHeight()); //Output: 4
+            Console.WriteLine(myTree.printHeight()); //Output: 3
             Console.WriteLine(" ");
             Console.WriteLine(myTree.printNumLeafNodes()); //Output 2
 
