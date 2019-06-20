@@ -35,10 +35,11 @@ namespace BST
             //Instantiate the tree and insert the student nodes.
             BST myTree = new BST();                             //              Charles
             myTree.insert(Charles);                             //              /     \
-            myTree.insert(Mike);                                //          Alice      Mike
-            myTree.insert(Alice);                               //              \     /
-            myTree.insert(Jennifer);                            //            Carl    Jennifer
-            myTree.insert("Carl", "Liberal Arts", "HI");
+            myTree.insert(Mike);                                //           Alice    Mike
+            myTree.insert(Alice);                               //              \
+            myTree.insert(Jennifer);                            //           Jennifer
+            myTree.insert("Carl", "Liberal Arts", "HI");        //             /
+                                                                //           Carl 
             //Search for students(output is boolean value).
             Console.WriteLine(myTree.search("Carl"));
             Console.WriteLine(myTree.search("Carlos"));
@@ -52,7 +53,7 @@ namespace BST
             Console.WriteLine(" ");
 
             //Output the Height and Number of Leaves on the the tree.
-            Console.WriteLine(myTree.printHeight()); //Output: 3
+            Console.WriteLine(myTree.printHeight()); //Output: 4
             Console.WriteLine(" ");
             Console.WriteLine(myTree.printNumLeafNodes()); //Output 2
 
@@ -89,10 +90,13 @@ namespace BST
         }
 
         //Insert a student and specify parameters directly into the tree.
-        public void insert(string name, string major, string originState)
+        
+        //Insert a student when student's parameters have already been specified from the students class.
+        public void insert(Student newStudent)
         {
-            Student newStudent = new Student(name, major, originState);
-            
+            {
+                insert(newStudent.name, newStudent.major, newStudent.originState);
+            }
             if (isEmpty()) //If tree is empty, the student becomes the root of the tree.
             {
                 root = newStudent;
@@ -105,7 +109,7 @@ namespace BST
                 {
                     //Compare the new student against current nodes.
                     if (string.Compare(newStudent.name, current.name) < 0) //If student's name belongs before current node..
-                    { 
+                    {
                         if (current.left != null) //.. and a node exists on the left..
                         {
                             current = current.left; //.. move to that node and compare values.
@@ -125,47 +129,6 @@ namespace BST
                         else //.. and the right node is empty..
                         {
                             current.right = newStudent; //.. place the node on the right.
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        //Insert a student when student's parameters have already been specified from the students class.
-        public void insert(Student newStudent)
-        {
-            if (isEmpty())
-            {
-                root = newStudent;
-            }
-            else
-            {
-                Student current = root;
-
-                while (true)
-                {
-                    if (string.Compare(newStudent.name, current.name) < 0)
-                    {
-                        if (current.left != null)
-                        {
-                            current = current.left;
-                        }
-                        else
-                        {
-                            current.left = newStudent;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (current.right != null)
-                        {
-                            current = current.right;
-                        }
-                        else
-                        {
-                            current.right = newStudent;
                             break;
                         }
                     }
