@@ -56,11 +56,8 @@ namespace BST
             Console.WriteLine(myTree.printHeight()); //Output: 4
             Console.WriteLine(" ");
             Console.WriteLine(myTree.printNumLeafNodes()); //Output 2
-
         }
     }
-
-
 
     public class BST
     {
@@ -79,7 +76,6 @@ namespace BST
                 this.major = major;
                 this.originState = originState;
             }
-
         }
 
         Student root;
@@ -162,7 +158,6 @@ namespace BST
                         current = current.right; //If name comes after current node, move right.
                     }
                 }
-
                 return false; //Student does not exist on the tree.
             }
         }
@@ -240,9 +235,7 @@ namespace BST
                 {
                     return rDepth + 1;
                 }
-
             }
-
         }
 
         public int printNumLeafNodes() //Find the number of leaf nodes on the tree.
