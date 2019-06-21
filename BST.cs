@@ -40,7 +40,7 @@ namespace BST
             myTree.insert(Jennifer);                            //           Jennifer
             myTree.insert("Carl", "Liberal Arts", "HI");        //             /
                                                                 //           Carl 
-            //Search for students(output is boolean value).
+                                                                //Search for students(output is boolean value).
             Console.WriteLine(myTree.search("Carl"));
             Console.WriteLine(myTree.search("Carlos"));
 
@@ -86,13 +86,14 @@ namespace BST
         }
 
         //Insert a student and specify parameters directly into the tree.
-        
+
         //Insert a student when student's parameters have already been specified from the students class.
+        public void insert(string name, string major, string originState)
+        {
+            insert(new Student(name, major, originState));
+        }
         public void insert(Student newStudent)
         {
-            {
-                insert(newStudent.name, newStudent.major, newStudent.originState);
-            }
             if (isEmpty()) //If tree is empty, the student becomes the root of the tree.
             {
                 root = newStudent;
@@ -218,7 +219,7 @@ namespace BST
             {
                 throw new Exception("The tree height is 0");
             }
-            else if(current == null)
+            else if (current == null)
             {
                 return 0;
             }
@@ -255,7 +256,7 @@ namespace BST
             }
             else
             {
-                if (current.left == null && current.right == null) 
+                if (current.left == null && current.right == null)
                 {
                     return 1; //If there is no left and right node, it is a leaf.
                 }
